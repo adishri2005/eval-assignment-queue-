@@ -1,0 +1,103 @@
+// File: prisma/schema.prisma
+// Purpose: Complete database schema for the Evaluator Assignment Queue system
+// NOTE: Migrated from PostgreSQL to MySQL — provider changed to "mysql".
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Enums
+// ---------------------------------------------------------------------------
+
+enum Role {
+  coordinator
+  evaluator
+}
+
+enum SheetStatus {
+  unassigned
+  assigned
+  in_progress
+  submitted
+}
+
+// ---------------------------------------------------------------------------
+// Models
+// ---------------------------------------------------------------------------
+
+/// System user — either a coordinator or an evaluator.
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password_hash String
+  role          Role
+  created_at    DateTime  @default(now())
+
+  evaluator Evaluator?
+
+  @@map("users")
+}
+
+/// An evaluator profile linked 1-to-1 with a User whose role = evaluator.
+model Evaluator {
+  id        String   @id @default(cuid())
+  user_id   String   @unique
+  name      String
+  is_active Boolean  @default(true)
+
+  user        User               @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  assignments Assignment[]
+  capacity    EvaluatorCapacity?
+
+  @@map("evaluators")
+}
+
+/// An uploaded answer sheet PDF awaiting evaluation.
+model AnswerSheet {
+  id          String      @id @default(cuid())
+  filename    String
+  pdf_url     String      @db.LongText
+  due_date    DateTime
+  status      SheetStatus @default(unassigned)
+  uploaded_at DateTime    @default(now())
+
+  assignment Assignment?
+
+  @@index([status])
+  @@index([due_date])
+  @@map("answer_sheets")
+}
+
+/// Junction record linking one answer sheet to one evaluator.
+model Assignment {
+  id           String    @id @default(cuid())
+  sheet_id     String    @unique
+  evaluator_id String
+  assigned_at  DateTime  @default(now())
+  started_at   DateTime?
+  submitted_at DateTime?
+
+  sheet     AnswerSheet @relation(fields: [sheet_id], references: [id], onDelete: Cascade)
+  evaluator Evaluator   @relation(fields: [evaluator_id], references: [id], onDelete: Cascade)
+
+  @@index([evaluator_id])
+  @@map("assignments")
+}
+
+/// Tracks how many sheets an evaluator can handle and how many they currently hold.
+model EvaluatorCapacity {
+  id            String @id @default(cuid())
+  evaluator_id  String @unique
+  max_sheets    Int
+  current_count Int    @default(0)
+
+  evaluator Evaluator @relation(fields: [evaluator_id], references: [id], onDelete: Cascade)
+
+  @@map("evaluator_capacities")
+}
