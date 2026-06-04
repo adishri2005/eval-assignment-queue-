@@ -1,0 +1,97 @@
+/* ═══════════════════════════════════════════════════════════════
+   morphisms.css — Glass, Neumorphism, Skeuomorphism Utilities
+   Applied by surface hierarchy, NOT decoration.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Glassmorphism ─── */
+.glass {
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  background: var(--color-glass-bg);
+  border: 1px solid var(--color-glass-border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08),
+              inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Fallback for browsers without backdrop-filter */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass {
+    background: var(--color-bg-elevated);
+  }
+}
+
+/* Lighter glass variant for nav */
+.glass--light {
+  backdrop-filter: blur(16px) saturate(200%);
+  -webkit-backdrop-filter: blur(16px) saturate(200%);
+  background: var(--color-glass-bg);
+  border-bottom: 1px solid var(--color-glass-border);
+}
+
+/* ─── Neumorphism — LIGHT MODE ONLY ─── */
+[data-theme="light"] .neuro {
+  background: var(--color-bg-elevated);
+  box-shadow:
+    6px 6px 12px var(--color-neuro-shadow),
+    -6px -6px 12px var(--color-neuro-light);
+  border-radius: var(--radius-lg);
+  border: none;
+}
+
+[data-theme="light"] .neuro--pressed {
+  box-shadow:
+    inset 4px 4px 8px var(--color-neuro-shadow),
+    inset -4px -4px 8px var(--color-neuro-light);
+}
+
+/* Dark mode replacement — glow elevated card */
+[data-theme="dark"] .neuro {
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-glow),
+              0 1px 0 var(--color-border-default);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-subtle);
+}
+
+/* Primary buttons keep their accent color — don't flatten to surface */
+[data-theme="dark"] .btn--primary.neuro {
+  background: var(--color-accent-primary);
+  color: var(--color-text-inverse);
+  border: none;
+  box-shadow: 0 0 20px rgba(232, 168, 50, 0.25),
+              0 4px 12px rgba(232, 168, 50, 0.15);
+}
+
+[data-theme="dark"] .btn--primary.neuro:hover:not(:disabled) {
+  box-shadow: 0 0 28px rgba(232, 168, 50, 0.35),
+              0 6px 20px rgba(232, 168, 50, 0.25);
+}
+
+[data-theme="dark"] .neuro--pressed {
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4),
+              var(--shadow-glow);
+}
+
+/* ─── Skeuomorphic upload tray ─── */
+.skeu-tray {
+  background: var(--color-bg-sunken);
+  border: 2px dashed var(--color-border-default);
+  border-radius: var(--radius-xl);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition:
+    border-color var(--duration-fast) var(--ease-out-expo),
+    background-color var(--duration-fast) var(--ease-out-expo),
+    box-shadow var(--duration-fast) var(--ease-out-expo);
+}
+
+.skeu-tray--active {
+  border-color: var(--color-accent-primary);
+  background: var(--color-accent-tertiary);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.03),
+              0 0 0 3px var(--color-accent-tertiary);
+}
+
+.skeu-tray:hover:not(.skeu-tray--active) {
+  border-color: var(--color-accent-secondary);
+  background: var(--color-accent-tertiary);
+}

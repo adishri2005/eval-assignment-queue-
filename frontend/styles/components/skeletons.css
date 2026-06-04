@@ -1,0 +1,167 @@
+/* ═══════════════════════════════════════════════════════════════
+   skeletons.css — Shimmer Loading Skeletons
+   Uses exact layout mirroring — skeletons match real content shape.
+   ═══════════════════════════════════════════════════════════════ */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-sunken) 25%,
+    var(--color-bg-elevated) 37%,
+    var(--color-bg-sunken) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+  border-radius: var(--radius-md);
+}
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.skeleton--text {
+  height: 14px;
+  width: 100%;
+  margin-bottom: var(--space-2);
+}
+
+.skeleton--text-sm {
+  height: 10px;
+  width: 60%;
+}
+
+.skeleton--text-lg {
+  height: 20px;
+  width: 40%;
+}
+
+.skeleton--circle {
+  border-radius: 50%;
+}
+
+.skeleton--badge {
+  width: 72px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+}
+
+.skeleton--btn {
+  width: 80px;
+  height: 32px;
+  border-radius: var(--radius-md);
+}
+
+/* ─── Stat card skeleton — 4-grid ─── */
+.skeleton-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .skeleton-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.skeleton-stat {
+  height: 100px;
+  border-radius: var(--radius-lg);
+}
+
+/* ─── Table row skeleton ─── */
+.skeleton-table {
+  contain: layout style;
+}
+
+.skeleton-row {
+  display: flex;
+  align-items: center;
+  padding: var(--space-4) var(--space-6);
+  gap: var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.skeleton-row__cell {
+  flex: 1;
+  height: 14px;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton-row__cell--sm {
+  flex: 0 0 60px;
+}
+
+.skeleton-row__cell--icon {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: var(--radius-md);
+}
+
+.skeleton-row__cell--badge {
+  flex: 0 0 72px;
+  height: 24px;
+  border-radius: var(--radius-full);
+}
+
+/* ─── Chart skeleton ─── */
+.skeleton--chart {
+  aspect-ratio: 16 / 9;
+  min-height: 280px;
+  border-radius: var(--radius-lg);
+}
+
+/* ─── Loading spinner ─── */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-border-default);
+  border-top-color: var(--color-accent-primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+.spinner--sm {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+/* ─── Loading page ─── */
+.loading-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  background: var(--color-bg-base);
+}
+
+.loading-page__text {
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ─── Crossfade: skeleton → content ─── */
+.skeleton-exit {
+  animation: skeleton-fade-out 300ms var(--ease-out-quart) forwards;
+}
+
+.content-enter {
+  animation: content-fade-in 300ms var(--ease-out-quart) forwards;
+}
+
+@keyframes skeleton-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes content-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

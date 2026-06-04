@@ -1,0 +1,127 @@
+/* ═══════════════════════════════════════════════════════════════
+   inputs.css — Form Inputs, Floating Labels, File Upload Zone
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Form group ─── */
+.form-group {
+  position: relative;
+  margin-bottom: var(--space-5);
+}
+
+/* ─── Base input ─── */
+.input {
+  display: block;
+  width: 100%;
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+  background: var(--color-bg-sunken);
+  border: 1.5px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  outline: none;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition:
+    border-color var(--duration-fast) var(--ease-out-expo),
+    box-shadow var(--duration-fast) var(--ease-out-expo),
+    background-color var(--duration-fast) var(--ease-out-expo);
+}
+
+.input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.input:hover:not(:focus):not(.input--error) {
+  border-color: var(--color-border-strong);
+}
+
+.input:focus {
+  border-color: var(--color-accent-primary);
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.04),
+    0 0 0 3px var(--color-accent-tertiary);
+  background: var(--color-bg-elevated);
+}
+
+/* ─── Input label ─── */
+.input-label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+/* ─── Error state ─── */
+.input--error {
+  border-color: var(--color-status-error);
+}
+
+.input--error:focus {
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.04),
+    0 0 0 3px rgba(185, 28, 28, 0.12);
+}
+
+.input-error {
+  font-size: var(--text-sm);
+  color: var(--color-status-error);
+  margin-top: var(--space-2);
+  animation: fade-in-up var(--duration-normal) var(--ease-out-expo);
+}
+
+/* ─── Date input ─── */
+.input--date {
+  padding: var(--space-3) var(--space-4);
+}
+
+/* ─── File upload drop zone ─── */
+.upload-zone {
+  position: relative;
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  cursor: pointer;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.upload-zone__icon {
+  width: 40px;
+  height: 40px;
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-2);
+  transition: color var(--duration-fast) var(--ease-out-expo);
+}
+
+.upload-zone:hover .upload-zone__icon,
+.skeu-tray--active .upload-zone__icon {
+  color: var(--color-accent-primary);
+}
+
+.upload-zone__label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.upload-zone__hint {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  margin-top: var(--space-1);
+}
+
+.upload-zone__input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upload-zone--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

@@ -1,0 +1,175 @@
+/* ═══════════════════════════════════════════════════════════════
+   navigation.css — Top Navbar (Sticky + Glassmorphism on scroll)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Base navbar ─── */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--navbar-height);
+  background: var(--color-bg-elevated);
+  border-bottom: 1px solid var(--color-border-subtle);
+  transition:
+    background var(--duration-normal) var(--ease-out-expo),
+    backdrop-filter var(--duration-normal) var(--ease-out-expo),
+    border-color var(--duration-normal) var(--ease-out-expo);
+}
+
+/* Glass state when scrolled */
+.navbar--scrolled {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(16px) saturate(200%);
+  -webkit-backdrop-filter: blur(16px) saturate(200%);
+  border-bottom-color: var(--color-glass-border);
+}
+
+/* ─── Navbar inner ─── */
+.navbar__inner {
+  max-width: var(--max-width-content);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 640px) {
+  .navbar__inner {
+    padding: 0 var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar__inner {
+    padding: 0 var(--space-8);
+  }
+}
+
+/* ─── Logo area ─── */
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.navbar__logo {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent-primary);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1;
+}
+
+.navbar__title {
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+  line-height: 1.2;
+}
+
+@media (max-width: 479px) {
+  .navbar__title {
+    display: none;
+  }
+}
+
+/* ─── Navbar actions (right side) ─── */
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.navbar__email {
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .navbar__email {
+    max-width: 100px;
+  }
+}
+
+@media (max-width: 479px) {
+  .navbar__email {
+    display: none;
+  }
+}
+
+/* ─── Theme toggle ─── */
+.theme-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  background: transparent;
+  transition:
+    background var(--duration-fast) var(--ease-out-expo),
+    color var(--duration-fast) var(--ease-out-expo);
+}
+
+.theme-toggle:hover {
+  background: var(--color-accent-tertiary);
+  color: var(--color-accent-primary);
+}
+
+.theme-toggle__icon {
+  width: 20px;
+  height: 20px;
+  transition: transform var(--duration-slow) var(--ease-spring);
+}
+
+.theme-toggle--animating .theme-toggle__icon {
+  animation: theme-toggle-rotate var(--duration-slow) var(--ease-spring);
+}
+
+/* Neumorphic toggle in light mode */
+[data-theme="light"] .theme-toggle {
+  background: var(--color-bg-elevated);
+  box-shadow:
+    3px 3px 6px var(--color-neuro-shadow),
+    -3px -3px 6px var(--color-neuro-light);
+}
+
+[data-theme="light"] .theme-toggle:active {
+  box-shadow:
+    inset 2px 2px 4px var(--color-neuro-shadow),
+    inset -2px -2px 4px var(--color-neuro-light);
+}
+
+/* Glow toggle in dark mode */
+[data-theme="dark"] .theme-toggle:hover {
+  box-shadow: 0 0 12px rgba(232, 168, 50, 0.2);
+}
+
+/* ─── Page header below navbar ─── */
+.page-header {
+  padding-top: var(--space-2);
+}
+
+.page-header__title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: var(--leading-tight);
+}
+
+.page-header__subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+  margin-top: var(--space-1);
+}

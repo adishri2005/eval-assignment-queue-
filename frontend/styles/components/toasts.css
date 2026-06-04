@@ -1,0 +1,93 @@
+/* ═══════════════════════════════════════════════════════════════
+   toasts.css — Sonner Toast Overrides
+   Uses the design system tokens for Sonner toast styling.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Override Sonner's default styles to match our design system */
+[data-sonner-toaster] {
+  --normal-bg: var(--color-bg-elevated);
+  --normal-border: var(--color-border-default);
+  --normal-text: var(--color-text-primary);
+  font-family: var(--font-body);
+}
+
+[data-sonner-toast] {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-elevated);
+  font-family: var(--font-body);
+}
+
+[data-sonner-toast] [data-title] {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+}
+
+[data-sonner-toast] [data-description] {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+[data-sonner-toast][data-type="success"] {
+  border-left: 3px solid var(--color-status-success);
+}
+
+[data-sonner-toast][data-type="error"] {
+  border-left: 3px solid var(--color-status-error);
+}
+
+[data-sonner-toast][data-type="warning"] {
+  border-left: 3px solid var(--color-status-warning);
+}
+
+[data-sonner-toast][data-type="info"] {
+  border-left: 3px solid var(--color-status-info);
+}
+
+/* ─── Modals / Dialogs ─── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 13, 11, 0.50);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: overlay-in var(--duration-normal) var(--ease-out-expo);
+}
+
+.modal {
+  position: relative;
+  background: var(--color-bg-overlay);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+  padding: var(--space-6);
+  max-width: 420px;
+  width: calc(100% - var(--space-8));
+  animation: modal-in var(--duration-normal) var(--ease-spring);
+}
+
+.modal__title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.modal__description {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-2);
+  line-height: var(--leading-normal);
+}
+
+.modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}

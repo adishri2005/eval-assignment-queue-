@@ -1,0 +1,86 @@
+/* ═══════════════════════════════════════════════════════════════
+   print.css — Print Stylesheet
+   ═══════════════════════════════════════════════════════════════ */
+
+@media print {
+  /* Hide non-printable elements */
+  .navbar,
+  .theme-toggle,
+  .btn,
+  .skeu-tray,
+  .upload-zone,
+  .spinner,
+  .modal-overlay,
+  [aria-hidden="true"] {
+    display: none !important; /* Intentional: must hide in print regardless of specificity */
+  }
+
+  /* Reset backgrounds and shadows */
+  body {
+    background: white !important; /* Intentional: print must be white */
+    color: black !important; /* Intentional: print must be black text */
+    font-size: 12pt;
+  }
+
+  .page {
+    min-height: auto;
+  }
+
+  .card,
+  .stat-card,
+  .card--login {
+    box-shadow: none !important; /* Intentional: no shadows in print */
+    border: 1px solid #ccc;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .neuro {
+    box-shadow: none !important; /* Intentional: no neumorphism in print */
+  }
+
+  .glass,
+  .glass--light {
+    backdrop-filter: none !important; /* Intentional: no blur in print */
+    -webkit-backdrop-filter: none !important; /* Intentional: no blur in print */
+    background: white !important; /* Intentional: print fallback */
+  }
+
+  /* Tables */
+  .table {
+    font-size: 10pt;
+  }
+
+  .table__row {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Charts */
+  canvas {
+    max-width: 100%;
+  }
+
+  /* Links */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+    color: #666;
+  }
+
+  /* Badges - make them print-friendly */
+  .badge {
+    border: 1px solid #999;
+    background: transparent !important; /* Intentional: no colored bg in print */
+    color: black !important; /* Intentional: must be readable in print */
+  }
+
+  /* Progress bars */
+  .progress-bar {
+    border: 1px solid #ccc;
+  }
+
+  .progress-bar__fill {
+    background: #333 !important; /* Intentional: visible fill in grayscale print */
+  }
+}

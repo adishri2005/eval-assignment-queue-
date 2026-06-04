@@ -1,0 +1,194 @@
+/* ═══════════════════════════════════════════════════════════════
+   buttons.css — Button Component Variants
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Base button ─── */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  background: none;
+  overflow: hidden;
+  user-select: none;
+  min-height: 44px;
+  transition:
+    transform var(--duration-fast) var(--ease-out-expo),
+    box-shadow var(--duration-fast) var(--ease-out-expo),
+    background-color var(--duration-fast) var(--ease-out-expo),
+    filter var(--duration-fast) var(--ease-out-expo),
+    opacity var(--duration-fast) var(--ease-out-expo);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ─── Primary ─── */
+.btn--primary {
+  background-color: var(--color-accent-primary);
+  color: var(--color-text-inverse);
+  border: 2px solid var(--color-accent-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Override neumorphism background when applied to primary buttons */
+.btn.btn--primary.neuro {
+  background-color: var(--color-accent-primary);
+  background: var(--color-accent-primary);
+}
+
+.btn--primary:hover:not(:disabled) {
+  background-color: transparent;
+  background: transparent;
+  color: var(--color-accent-primary);
+  border-color: var(--color-accent-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(201, 125, 10, 0.3);
+  filter: none;
+}
+
+.btn.btn--primary.neuro:hover:not(:disabled) {
+  background-color: transparent;
+  background: transparent;
+  color: var(--color-accent-primary);
+}
+
+.btn--primary:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+  filter: brightness(0.95);
+  background-color: var(--color-accent-primary);
+  background: var(--color-accent-primary);
+  color: var(--color-text-inverse);
+}
+
+.btn--primary:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 3px;
+}
+
+/* ─── Secondary ─── */
+.btn--secondary {
+  background: transparent;
+  border: 1.5px solid var(--color-accent-primary);
+  color: var(--color-accent-primary);
+}
+
+.btn--secondary:hover:not(:disabled) {
+  background: var(--color-accent-tertiary);
+  transform: translateY(-1px);
+}
+
+.btn--secondary:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ─── Ghost ─── */
+.btn--ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+}
+
+.btn--ghost:hover:not(:disabled) {
+  background: var(--color-accent-tertiary);
+  color: var(--color-text-primary);
+}
+
+.btn--ghost:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* ─── Danger ─── */
+.btn--danger {
+  background: var(--color-status-error);
+  color: #fff;
+}
+
+.btn--danger:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+/* ─── Success ─── */
+.btn--success {
+  background: var(--color-status-success);
+  color: #fff;
+}
+
+.btn--success:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+/* ─── Full width ─── */
+.btn--full {
+  width: 100%;
+}
+
+/* ─── Large ─── */
+.btn--lg {
+  padding: var(--space-4) var(--space-6);
+  font-size: var(--text-base);
+  min-height: 48px;
+  border-radius: var(--radius-lg);
+}
+
+/* ─── Small ─── */
+.btn--sm {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-xs);
+  min-height: 32px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Icon only ─── */
+.btn--icon {
+  padding: var(--space-2);
+  min-height: 40px;
+  min-width: 40px;
+  border-radius: var(--radius-md);
+}
+
+/* ─── Loading state ─── */
+.btn--loading .btn__label {
+  opacity: 0;
+}
+
+.btn--loading::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: btn-spin 0.7s linear infinite;
+}
+
+/* ─── Button label ─── */
+.btn__label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  transition: opacity var(--duration-fast);
+}
+
+/* ─── Button icon ─── */
+.btn__icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}

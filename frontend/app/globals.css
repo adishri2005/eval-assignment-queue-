@@ -1,0 +1,30 @@
+/* File: app/globals.css */
+/* Purpose: Import manifest — pulls in the entire design system in dependency order. */
+/* No Tailwind directives. No @apply. Pure CSS custom properties + BEM. */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
+
+/* ─── Foundation ─── */
+@import '../styles/tokens.css';
+@import '../styles/reset.css';
+@import '../styles/themes.css';
+@import '../styles/base.css';
+@import '../styles/layout.css';
+@import '../styles/animations.css';
+@import '../styles/morphisms.css';
+
+/* ─── Components ─── */
+@import '../styles/components/buttons.css';
+@import '../styles/components/inputs.css';
+@import '../styles/components/badges.css';
+@import '../styles/components/navigation.css';
+@import '../styles/components/cards.css';
+@import '../styles/components/tables.css';
+@import '../styles/components/skeletons.css';
+@import '../styles/components/toasts.css';
+@import '../styles/components/login.css';
+@import '../styles/components/charts.css';
+@import '../styles/components/scroll.css';
+
+/* ─── Utilities ─── */
+@import '../styles/print.css';

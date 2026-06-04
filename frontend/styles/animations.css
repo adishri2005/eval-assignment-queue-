@@ -1,0 +1,190 @@
+/* ═══════════════════════════════════════════════════════════════
+   animations.css — All Keyframes & Animation Utilities
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Fade in (up) ─── */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.anim-fade-in {
+  animation: fade-in-up var(--duration-slow) var(--ease-out-quart) both;
+}
+
+/* ─── Slide in (left) ─── */
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.anim-slide-in {
+  animation: slide-in-left var(--duration-normal) var(--ease-out-expo) both;
+}
+
+/* ─── Spinner ─── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.anim-spin {
+  animation: spin 0.7s linear infinite;
+}
+
+/* ─── Button spinner ─── */
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Shimmer (skeleton loading) ─── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ─── Shake (form error) ─── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 50%, 90% { transform: translateX(-4px); }
+  30%, 70% { transform: translateX(4px); }
+}
+
+.anim-shake {
+  animation: shake var(--duration-slow) var(--ease-out-expo);
+}
+
+/* ─── Ripple expand ─── */
+@keyframes ripple-expand {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(0);
+  animation: ripple-expand 600ms var(--ease-out-expo) forwards;
+  pointer-events: none;
+}
+
+/* ─── Scale pop (badge update) ─── */
+@keyframes scale-pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+.anim-pop {
+  animation: scale-pop var(--duration-normal) var(--ease-spring);
+}
+
+/* ─── Modal entrance ─── */
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modal-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+
+/* ─── Overlay entrance ─── */
+@keyframes overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── Toast slide ─── */
+@keyframes toast-in {
+  from {
+    transform: translateX(110%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toast-out {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(110%);
+    opacity: 0;
+  }
+}
+
+/* ─── Dropdown entrance ─── */
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: scaleY(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* ─── Float (illustration) ─── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+.anim-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* ─── Row flash (status update) ─── */
+@keyframes row-flash {
+  0%   { background-color: var(--color-accent-tertiary); }
+  100% { background-color: transparent; }
+}
+
+.anim-row-flash {
+  animation: row-flash var(--duration-slow) var(--ease-out-quart);
+}
+
+/* ─── Stagger delays ─── */
+.anim-delay-1 { animation-delay: 100ms; }
+.anim-delay-2 { animation-delay: 200ms; }
+.anim-delay-3 { animation-delay: 300ms; }
+.anim-delay-4 { animation-delay: 400ms; }
+
+/* ─── Theme toggle icon ─── */
+@keyframes theme-toggle-rotate {
+  from { transform: rotate(0deg) scale(0.8); }
+  to   { transform: rotate(360deg) scale(1); }
+}

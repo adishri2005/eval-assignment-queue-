@@ -1,0 +1,91 @@
+/* ═══════════════════════════════════════════════════════════════
+   themes.css — Light & Dark Theme Color Definitions
+   Applied via data-theme attribute on <html>.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── LIGHT THEME ─── */
+[data-theme="light"] {
+  --color-bg-base:        #F5F3EF;
+  --color-bg-elevated:    #FDFCFA;
+  --color-bg-overlay:     #FFFFFF;
+  --color-bg-sunken:      #EDE9E3;
+
+  --color-border-subtle:  rgba(30, 25, 15, 0.07);
+  --color-border-default: rgba(30, 25, 15, 0.14);
+  --color-border-strong:  rgba(30, 25, 15, 0.28);
+
+  --color-text-primary:   #1A1713;
+  --color-text-secondary: #5C5648;
+  --color-text-tertiary:  #9C9488;
+  --color-text-inverse:   #F5F3EF;
+
+  --color-accent-primary:   #C97D0A;
+  --color-accent-secondary: #E8A832;
+  --color-accent-tertiary:  #FDF3E0;
+
+  --color-status-success: #1A7A4A;
+  --color-status-warning: #B45309;
+  --color-status-error:   #B91C1C;
+  --color-status-info:    #1D6FA4;
+
+  --color-glass-bg:     rgba(253, 252, 250, 0.70);
+  --color-glass-border: rgba(255, 255, 255, 0.60);
+  --color-neuro-light:  rgba(255, 255, 255, 0.85);
+  --color-neuro-shadow: rgba(180, 168, 150, 0.45);
+
+  --shadow-glow: none;
+
+  color-scheme: light;
+}
+
+/* ─── DARK THEME ─── */
+[data-theme="dark"] {
+  --color-bg-base:        #100F0D;
+  --color-bg-elevated:    #1C1A17;
+  --color-bg-overlay:     #252320;
+  --color-bg-sunken:      #0C0B09;
+
+  --color-border-subtle:  rgba(245, 240, 225, 0.06);
+  --color-border-default: rgba(245, 240, 225, 0.12);
+  --color-border-strong:  rgba(245, 240, 225, 0.24);
+
+  --color-text-primary:   #F0EDE6;
+  --color-text-secondary: #A89F92;
+  --color-text-tertiary:  #8A8278; /* WCAG AA: 4.7:1 on #100F0D */
+  --color-text-inverse:   #100F0D;
+
+  --color-accent-primary:   #E8A832;
+  --color-accent-secondary: #C97D0A;
+  --color-accent-tertiary:  rgba(232, 168, 50, 0.12);
+
+  --color-status-success: #34C87A;
+  --color-status-warning: #F59E0B;
+  --color-status-error:   #F87171;
+  --color-status-info:    #60A5FA;
+
+  --color-glass-bg:     rgba(28, 26, 23, 0.75);
+  --color-glass-border: rgba(245, 240, 225, 0.10);
+  --color-neuro-light:  rgba(255, 255, 255, 0.04);
+  --color-neuro-shadow: rgba(0, 0, 0, 0.60);
+
+  --shadow-glow: 0 0 24px rgba(232, 168, 50, 0.18);
+
+  color-scheme: dark;
+
+  /* Backdrop-filter fallback for Firefox < 103 */
+  --color-glass-bg-fallback: rgba(28, 26, 23, 0.95);
+}
+
+/* ─── Theme transition class (applied during toggle) ─── */
+.theme-transitioning,
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+  transition:
+    background-color 300ms,
+    color 300ms,
+    border-color 300ms,
+    box-shadow 300ms,
+    fill 300ms,
+    stroke 300ms !important; /* Intentional: overrides component transitions during theme switch */
+}
