@@ -1,0 +1,513 @@
+{
+  "info": {
+    "_postman_id": "eaq-sprint1-2026",
+    "name": "EAQ API — Sprint 1",
+    "description": "Complete API collection for the Evaluator Assignment Queue system.\n\nSetup:\n1. Set the {{baseUrl}} variable to your backend URL (default: http://localhost:3001)\n2. Run 'Login as Coordinator' first to auto-set {{coordinatorToken}}\n3. Run 'Login as Evaluator' to auto-set {{evaluatorToken}} and {{evaluatorId}}",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3001",
+      "type": "string"
+    },
+    {
+      "key": "coordinatorToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "evaluatorToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "evaluatorId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "description": "Authentication endpoints",
+      "item": [
+        {
+          "name": "Login as Coordinator",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response has token and role', function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('token');",
+                  "    pm.expect(jsonData).to.have.property('role');",
+                  "    pm.expect(jsonData.role).to.eql('coordinator');",
+                  "    pm.expect(jsonData).to.have.property('userId');",
+                  "});",
+                  "",
+                  "// Auto-set coordinatorToken for subsequent requests",
+                  "var jsonData = pm.response.json();",
+                  "pm.collectionVariables.set('coordinatorToken', jsonData.token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"coordinator@xebia.com\",\n  \"password\": \"Coord@123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login as Evaluator",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response has token, role, and evaluatorId', function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('token');",
+                  "    pm.expect(jsonData.role).to.eql('evaluator');",
+                  "    pm.expect(jsonData).to.have.property('evaluatorId');",
+                  "    pm.expect(jsonData.evaluatorId).to.not.be.null;",
+                  "});",
+                  "",
+                  "// Auto-set evaluatorToken and evaluatorId",
+                  "var jsonData = pm.response.json();",
+                  "pm.collectionVariables.set('evaluatorToken', jsonData.token);",
+                  "pm.collectionVariables.set('evaluatorId', jsonData.evaluatorId);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"evaluator1@xebia.com\",\n  \"password\": \"Eval@123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login — Invalid Credentials",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 401', function () {",
+                  "    pm.response.to.have.status(401);",
+                  "});",
+                  "",
+                  "pm.test('Error response has correct structure', function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('error');",
+                  "    pm.expect(jsonData).to.have.property('code');",
+                  "    pm.expect(jsonData.code).to.eql('AUTH_INVALID_CREDENTIALS');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"coordinator@xebia.com\",\n  \"password\": \"wrongpassword\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Assignment",
+      "description": "Assignment engine endpoints (coordinator only)",
+      "item": [
+        {
+          "name": "Trigger Assignment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response has assignment results', function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('message');",
+                  "    pm.expect(jsonData).to.have.property('assigned');",
+                  "    pm.expect(jsonData).to.have.property('skipped');",
+                  "    pm.expect(jsonData).to.have.property('evaluatorsAtCapacity');",
+                  "    pm.expect(jsonData.assigned).to.be.a('number');",
+                  "    pm.expect(jsonData.evaluatorsAtCapacity).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{coordinatorToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/assign",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "assign"]
+            }
+          }
+        },
+        {
+          "name": "Trigger Assignment — As Evaluator (403)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 403', function () {",
+                  "    pm.response.to.have.status(403);",
+                  "});",
+                  "",
+                  "pm.test('Returns forbidden error', function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.code).to.eql('AUTH_FORBIDDEN');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{evaluatorToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/assign",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "assign"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Queue",
+      "description": "Evaluator queue endpoints",
+      "item": [
+        {
+          "name": "Get Evaluator Queue",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response is an array of queue items', function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.be.an('array');",
+                  "    if (jsonData.length > 0) {",
+                  "        var item = jsonData[0];",
+                  "        pm.expect(item).to.have.property('assignmentId');",
+                  "        pm.expect(item).to.have.property('sheetId');",
+                  "        pm.expect(item).to.have.property('filename');",
+                  "        pm.expect(item).to.have.property('pdfUrl');",
+                  "        pm.expect(item).to.have.property('dueDate');",
+                  "        pm.expect(item).to.have.property('status');",
+                  "        pm.expect(item).to.have.property('assignedAt');",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{evaluatorToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/queue/{{evaluatorId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "queue", "{{evaluatorId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sheet",
+      "description": "Sheet status update endpoints",
+      "item": [
+        {
+          "name": "Start Sheet (in_progress)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "// Fetch the queue to get the first assigned sheet's ID",
+                  "const evalToken = pm.collectionVariables.get('evaluatorToken');",
+                  "const evalId = pm.collectionVariables.get('evaluatorId');",
+                  "const baseUrl = pm.collectionVariables.get('baseUrl');",
+                  "",
+                  "pm.sendRequest({",
+                  "    url: baseUrl + '/api/queue/' + evalId,",
+                  "    method: 'GET',",
+                  "    header: { 'Authorization': 'Bearer ' + evalToken }",
+                  "}, function (err, response) {",
+                  "    if (!err && response.code === 200) {",
+                  "        var queue = response.json();",
+                  "        var assigned = queue.find(function(item) { return item.status === 'assigned'; });",
+                  "        if (assigned) {",
+                  "            pm.collectionVariables.set('testSheetId', assigned.sheetId);",
+                  "        }",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Sheet status updated to in_progress', function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('status');",
+                  "    pm.expect(jsonData.status).to.eql('in_progress');",
+                  "    pm.expect(jsonData).to.have.property('startedAt');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{evaluatorToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"in_progress\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/sheet/{{testSheetId}}/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "sheet", "{{testSheetId}}", "status"]
+            }
+          }
+        },
+        {
+          "name": "Submit Sheet (submitted)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Sheet status updated to submitted', function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.status).to.eql('submitted');",
+                  "    pm.expect(jsonData).to.have.property('submittedAt');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{evaluatorToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"submitted\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/sheet/{{testSheetId}}/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "sheet", "{{testSheetId}}", "status"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "description": "Coordinator dashboard endpoints",
+      "item": [
+        {
+          "name": "Get Dashboard Stats",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response is array of evaluator stats', function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.be.an('array');",
+                  "    if (jsonData.length > 0) {",
+                  "        var stat = jsonData[0];",
+                  "        pm.expect(stat).to.have.property('evaluatorId');",
+                  "        pm.expect(stat).to.have.property('name');",
+                  "        pm.expect(stat).to.have.property('total');",
+                  "        pm.expect(stat).to.have.property('completed');",
+                  "        pm.expect(stat).to.have.property('inProgress');",
+                  "        pm.expect(stat).to.have.property('pending');",
+                  "        pm.expect(stat).to.have.property('completionPct');",
+                  "        pm.expect(stat.total).to.be.a('number');",
+                  "        pm.expect(stat.completionPct).to.be.a('number');",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{coordinatorToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/dashboard/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "dashboard", "stats"]
+            }
+          }
+        },
+        {
+          "name": "Get Dashboard Stats — As Evaluator (403)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 403', function () {",
+                  "    pm.response.to.have.status(403);",
+                  "});",
+                  "",
+                  "pm.test('Returns forbidden error', function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.code).to.eql('AUTH_FORBIDDEN');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{evaluatorToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/dashboard/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "dashboard", "stats"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
