@@ -1,6 +1,6 @@
 # EAQ — Evaluator Assignment Queue (Fair Distribution)
 
-A production-ready system for fairly distributing answer sheet evaluations to evaluators using a 3-rule engine: **Round-Robin cycling**, **Capacity limits**, and **Due-date priority**. Built during the Xebia Summer Internship 2026, Sprint 1.
+A production-ready system for fairly distributing answer sheet evaluations to evaluators using a 3-rule engine: **Round-Robin cycling**, **Capacity limits**, and **Due-date priority**. 
 
 ---
 
@@ -219,10 +219,10 @@ The frontend will be running at `http://localhost:3000`.
 
 | Role        | Email                    | Password  |
 | ----------- | ------------------------ | --------- |
-| Coordinator | coordinator@xebia.com    | Coord@123 |
-| Evaluator 1 | evaluator1@xebia.com     | Eval@123  |
-| Evaluator 2 | evaluator2@xebia.com     | Eval@123  |
-| Evaluator 3 | evaluator3@xebia.com     | Eval@123  |
+| Coordinator | coordinator@example.com    | Coord@123 |
+| Evaluator 1 | evaluator1@example.com     | Eval@123  |
+| Evaluator 2 | evaluator2@example.com     | Eval@123  |
+| Evaluator 3 | evaluator3@example.com     | Eval@123  |
 
 ---
 
