@@ -1,4 +1,4 @@
-# EAQ — Evaluator Assignment Queue (Fair Distribution)
+# Vinayasa — Fair Distribution
 
 A production-ready system for fairly distributing answer sheet evaluations to evaluators using a 3-rule engine: **Round-Robin cycling**, **Capacity limits**, and **Due-date priority**. 
 
@@ -170,8 +170,8 @@ Table evaluator_capacities {
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/adishri2005/eval-assignment-queue-.git
-cd eval-assignment-queue-
+git clone https://github.com/adishri2005/vinayasa.git
+cd vinayasa
 ```
 
 ### 2. Backend Setup
@@ -424,7 +424,7 @@ Import `docs/postman_collection.json` into Postman:
 ### Backend (`backend/.env`)
 
 ```env
-DATABASE_URL="mysql://root:password@localhost:3306/eaq_db"
+DATABASE_URL="mysql://root:password@localhost:3306/vinayasa_db"
 JWT_SECRET="your-secret-key-here"
 PORT=3001
 CORS_ORIGIN="http://localhost:3000"

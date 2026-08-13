@@ -1,8 +1,8 @@
 {
   "info": {
-    "_postman_id": "eaq-sprint1-2026",
-    "name": "EAQ API — Sprint 1",
-    "description": "Complete API collection for the Evaluator Assignment Queue system.\n\nSetup:\n1. Set the {{baseUrl}} variable to your backend URL (default: http://localhost:3001)\n2. Run 'Login as Coordinator' first to auto-set {{coordinatorToken}}\n3. Run 'Login as Evaluator' to auto-set {{evaluatorToken}} and {{evaluatorId}}",
+    "_postman_id": "vinayasa-sprint1-2026",
+    "name": "Vinayasa API — Sprint 1",
+    "description": "Complete API collection for the Vinayasa system.\n\nSetup:\n1. Set the {{baseUrl}} variable to your backend URL (default: http://localhost:3001)\n2. Run 'Login as Coordinator' first to auto-set {{coordinatorToken}}\n3. Run 'Login as Evaluator' to auto-set {{evaluatorToken}} and {{evaluatorId}}",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [

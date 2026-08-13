@@ -48,8 +48,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 // ---------------------------------------------------------------------------
 // Storage keys
 // ---------------------------------------------------------------------------
-const TOKEN_KEY = 'eaq_token';
-const USER_KEY = 'eaq_user';
+const TOKEN_KEY = 'vinayasa_token';
+const USER_KEY = 'vinayasa_user';
 
 // ---------------------------------------------------------------------------
 // Provider

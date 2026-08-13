@@ -1,10 +1,10 @@
 // File: lib/theme.ts
-// Purpose: Theme detection, toggle, persistence (localStorage key: 'eaq-theme').
+// Purpose: Theme detection, toggle, persistence (localStorage key: 'vinayasa-theme').
 //          Also exports the inline script string for flash prevention in <head>.
 
 'use client';
 
-const THEME_KEY = 'eaq-theme';
+const THEME_KEY = 'vinayasa-theme';
 type Theme = 'light' | 'dark';
 
 /**

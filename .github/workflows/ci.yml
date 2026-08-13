@@ -2,7 +2,7 @@
 # Purpose: CI pipeline — lint, build, and test on push/PR to main.
 #          Uses MySQL 8 service container for integration tests.
 
-name: EAQ CI Pipeline
+name: Vinayasa CI Pipeline
 
 on:
   push:
@@ -75,7 +75,7 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: eaq_test
+          MYSQL_DATABASE: vinayasa_test
         ports:
           - 3306:3306
         options: >-
@@ -85,7 +85,7 @@ jobs:
           --health-retries=5
 
     env:
-      DATABASE_URL: "mysql://root:root@127.0.0.1:3306/eaq_test"
+      DATABASE_URL: "mysql://root:root@127.0.0.1:3306/vinayasa_test"
       JWT_SECRET: "ci-test-secret-key"
       PORT: 3001
       CORS_ORIGIN: "http://localhost:3000"

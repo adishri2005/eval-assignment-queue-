@@ -17,7 +17,7 @@ async function main() {
 
     // Start HTTP server
     app.listen(PORT, () => {
-      console.log(`[SERVER] EAQ Backend running on http://localhost:${PORT}`);
+      console.log(`[SERVER] Vinayasa Backend running on http://localhost:${PORT}`);
       console.log(`[SERVER] Health check: http://localhost:${PORT}/health`);
       console.log(`[SERVER] Environment: ${process.env.NODE_ENV || 'development'}`);
     });

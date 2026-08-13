@@ -297,7 +297,7 @@ function CoordinatorDashboard() {
       <nav className={`navbar ${isNavScrolled ? 'navbar--scrolled' : ''}`} aria-label="Main navigation">
         <div className="navbar__inner">
           <div className="navbar__brand">
-            <span className="navbar__logo" aria-hidden="true">EAQ</span>
+            <span className="navbar__logo" aria-hidden="true">Vinayasa</span>
             <span className="navbar__title">Coordinator Dashboard</span>
           </div>
           <div className="navbar__actions">

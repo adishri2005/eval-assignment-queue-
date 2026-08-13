@@ -311,7 +311,7 @@ function EvaluatorQueue() {
       <nav className={`navbar ${isNavScrolled ? 'navbar--scrolled' : ''}`} aria-label="Main navigation">
         <div className="navbar__inner" style={{ maxWidth: 'var(--max-width-narrow)' }}>
           <div className="navbar__brand">
-            <span className="navbar__logo" aria-hidden="true">EAQ</span>
+            <span className="navbar__logo" aria-hidden="true">Vinayasa</span>
             <span className="navbar__title">My Queue</span>
           </div>
           <div className="navbar__actions">
