@@ -1,5 +1,5 @@
 // File: lib/api.ts
-// Purpose: Typed API client wrapping fetch for all EAQ endpoints.
+// Purpose: Typed API client wrapping fetch for all Vinayasa endpoints.
 //
 // AUTH TOKEN STORAGE DECISION:
 // We use localStorage via React Context (AuthContext.tsx) instead of httpOnly cookies.
@@ -98,7 +98,7 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
 function getToken(): string | null {
   if (typeof window === 'undefined') return null;
-  return localStorage.getItem('eaq_token');
+  return localStorage.getItem('vinayasa_token');
 }
 
 function authHeaders(): HeadersInit {

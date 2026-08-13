@@ -141,9 +141,9 @@ export default function LoginPage() {
               />
             </svg>
           </div>
-          <h1 className="login-header__title">EAQ</h1>
+          <h1 className="login-header__title">Vinayasa</h1>
           <p className="login-header__subtitle">
-            Evaluator Assignment Queue
+            Vinayasa
           </p>
         </header>
 

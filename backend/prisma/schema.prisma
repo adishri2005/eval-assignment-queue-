@@ -1,5 +1,5 @@
 // File: prisma/schema.prisma
-// Purpose: Complete database schema for the Evaluator Assignment Queue system
+// Purpose: Complete database schema for the Vinayasa system
 // NOTE: Migrated from PostgreSQL to MySQL — provider changed to "mysql".
 
 generator client {

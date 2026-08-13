@@ -1,7 +1,7 @@
-# EAQ Sprint 1 Report — Evaluator Assignment Queue (Fair Distribution)
+# Vinayasa Sprint 1 Report
 
 ```
-Project:        Evaluator Assignment Queue (Fair Distribution)
+Project:        Vinayasa
 Program:        Xebia Summer Internship 2026
 Sprint:         Sprint 1 (5-Day)
 Report Date:    2026-06-05
@@ -58,7 +58,7 @@ All three pages are functional, the API has 7 endpoints (2 more than planned), t
 ## 4. Repository Structure & Codebase Organization
 
 ```
-eval-assignment-queue-/
+vinayasa/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml                          ← GitHub Actions CI pipeline (131 lines, MySQL 8 setup)

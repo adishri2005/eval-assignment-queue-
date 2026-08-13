@@ -8,7 +8,7 @@ import { Providers } from './providers';
 import { Toaster } from 'sonner';
 
 export const metadata: Metadata = {
-  title: 'EAQ — Evaluator Assignment Queue',
+  title: 'Vinayasa',
   description:
     'Fair distribution system for answer sheet evaluation. Automatically assigns sheets to evaluators using round-robin, capacity limits, and due-date priority.',
   keywords: ['evaluator', 'assignment', 'queue', 'fair distribution', 'education'],
@@ -31,7 +31,7 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  var saved = localStorage.getItem('eaq-theme');
+                  var saved = localStorage.getItem('vinayasa-theme');
                   var preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
                   document.documentElement.setAttribute('data-theme', saved || preferred);
                 } catch(e) {
